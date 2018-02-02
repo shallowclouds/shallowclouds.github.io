@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>浅云的博客</title>
   <id>https://shallowclouds.github.io</id>
-  <updated>2017-12-16T19:55:19+08:00</updated>
-  <subtitle>分享一些奇怪的东西 邮箱：i@yorling.com</subtitle>
+  <updated>2018-02-02T15:29:55+08:00</updated>
+  <subtitle>分享一些奇怪的东西 , 这是一个部署在github pages上的静态博客, </subtitle>
   <link href="https://shallowclouds.github.io"></link>
   <author>
     <name>浅云的博客</name>
