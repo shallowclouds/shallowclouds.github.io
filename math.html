@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅云的博客">
+<meta name="twitter:description" content="分享一些奇怪的东西 邮箱：i@yorling.com">
+<meta name="twitter:image:src" content="https://shallowclouds.github.io/images/yorling.jpg">
+
+<meta property="og:url" content="https://shallowclouds.github.io">
+<meta property="og:title" content="浅云的博客">
+<meta property="og:description" content="分享一些奇怪的东西 邮箱：i@yorling.com">
+<meta property="og:site_name" content="浅云的博客">
+<meta property="og:image" content="https://shallowclouds.github.io/images/yorling.jpg">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="浅云的博客">
+<meta itemprop="description" content="分享一些奇怪的东西 邮箱：i@yorling.com">
+<meta itemprop="image" content="https://shallowclouds.github.io/images/yorling.jpg">
+
+<link rel="canonical" href="https://shallowclouds.github.io">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="算法,数学,">
+        <meta name="description" content="数论的一些基础知识点">
+        <meta name="author" content="">
+        <title>数论的一些基础知识点</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/yorling.jpg" />
+    浅云的博客
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/about.me.html">关于</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">数论的一些基础知识点</h1>
+                <section class="info">
+                    
+                    
+                    
+                    <span class="date" data-time="1534583220"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/%e7%ae%97%e6%b3%95/index.html">算法</a><a class="tag" href="/tag/%e6%95%b0%e5%ad%a6/index.html">数学</a></span>
+                </section>
+                <article class="content"><h1>数论</h1>
+
+<p>一些数论相关的知识点。</p>
+
+<h2>逆元(inverse)</h2>
+
+<p>若 $b$ 是 $a$关于 $m$ 的逆元则有：$ ab \equiv 1 \pmod m $，即 $ (ab) \bmod m = 1 $。</p>
+
+<h3>应用</h3>
+
+<p>求解 $ (a/b) \bmod m $：</p>
+
+<p>设 $c$ 为 $b$ 关于 $m$ 的逆元，即有： $ (bc) \bmod m = 1 $ 。</p>
+
+<p>那么 $ (a/b) \bmod m = (a/b*1) \bmod m = ((a/b) * (bc)) \bmod m = (a*c) \bmod m $</p>
+
+<p>即：$a$ 除以 $b$ 取模等价于 $a$ 乘以 $b$ 的逆元取模。</p>
+
+<h3>求解</h3>
+
+<h4>扩展欧几里得</h4>
+
+<p>若 $b$ 是 $a$ 关于 $m$ 的逆元则有：$ ab \equiv 1 \pmod m $。</p>
+
+<p>等价于存在 k 使得 $ k*m + 1 = ab $，即求解 $ km - ab = 1 $ 中的 $b$，由于 a 和 m 已知，可将 b 和 k 看成未知数，问题转化为求解线性方程：$ mx - ay = 1 $，可以使用扩展欧几里得算法( exgcd )求解。</p>
+
+<p>同时我们通过扩展欧几里得算法的限制知道：若 a 和 m 不互质（$\gcd (a, m) \neq 1$），则不存在 a 关于 m 的逆元。</p>
+
+<pre><code class="language-c++">ll extend_gcd(ll a, ll b, ll &amp;x, ll &amp;y) 
+{
+    if (b == 0) 
+    {
+        x = 1, y = 0;
+        return a;
+    }
+    else 
+    {
+        ll r = extend_gcd(b, a % b, y, x);
+        y -= x * (a / b);
+        return r;
+    }
+}
+
+ll inv(ll a, ll n) 
+{
+    ll x, y;
+    extend_gcd(a, n, x, y);
+    x = (x % n + n) % n;
+    return x;
+}
+</code></pre>
+
+<h4>费马小定理</h4>
+
+<p>由费马小定理可知：$ x^{p-1} \equiv 1 \pmod p $，则有：$ x * x ^{p-2} \equiv 1 \pmod p $。</p>
+
+<p>即 x 的逆元是 $x^{p-2}$。</p>
+
+<p>注意 x 和 p 必须互质。</p>
+
+<pre><code class="language-c++">const int mod = 1000000009;
+long long quickpow(long long a, long long b) 
+{
+    if (b &lt; 0) return 0;
+    long long ret = 1;
+    a %= mod;
+    while(b) 
+    {
+        if (b &amp; 1) ret = (ret * a) % mod;
+        b &gt;&gt;= 1;
+        a = (a * a) % mod;
+    }
+    return ret;
+}
+long long inv(long long a) 
+{
+    return quickpow(a, mod - 2);
+}
+</code></pre>
+
+<h4>线性逆元筛</h4>
+
+<pre><code class="language-c++">const int mod = 1000000009;
+const int maxn = 10005;
+int inv[maxn];
+inv[1] = 1;
+for(int i = 2; i &lt; 10000; i++)
+    inv[i] = inv[mod % i] * (mod - mod / i) % mod;
+</code></pre>
+
+<h4>求阶乘的逆元</h4>
+
+<pre><code class="language-c++">const int mod = 1000000009;
+const int maxn = 10005;
+int inv[maxn];
+inv[1] = 1;
+for(int i = 2; i &lt; 10000; i++)
+    inv[i] = inv[mod % i] * (mod - mod / i) % mod;
+</code></pre>
+
+<h2>多项式</h2>
+
+<h3>快速傅里叶变换(FFT)</h3>
+
+<p>欧拉公式：$ e^{i\theta} = \cos \theta + i \sin \theta $</p>
+
+<h2>欧拉定理</h2>
+
+<h3>欧拉函数</h3>
+
+<p>$\phi(n)$表示小于等于 $ n $ 的正整数之中，有多少个与$n$构成互质关系。</p>
+
+<p>分类讨论</p>
+
+<ol>
+<li>n = 1， 则$\phi(n) = 1$</li>
+<li>n 为质数，则$ \phi(n) = n - 1 $</li>
+<li>n 为质数的某个幂，即$ n = p ^ k $(p为质数)，则$ \phi(n)  = p^k - p^{k-1} $</li>
+<li>n 为两个互质的整数之积，即 $ n = p_1 \times p_2 $ ，则$ \phi(n) = \phi(p_1p_2) = \phi(p_1) \phi(p_2) $</li>
+<li>n 分解为若干个质数的幂，即 $ n = p_{1}^{k<em>1}p</em>{2}^{k<em>2}p</em>{3}^{k<em>3}&hellip;p</em>{r}^{k_r}$，则根据4可知$\phi(n) = n(1-\frac{1}{p1})(1-\frac{1}{p2})(1-\frac{1}{p3})&hellip;(1-\frac{1}{pr})$</li>
+</ol>
+
+<h3>欧拉定理</h3>
+
+<p>如果两个正整数a，n互质，则n的欧拉函数满足以下等式：</p>
+
+<p>$$a^{\phi(n)} \equiv  1 \pmod n$$</p>
+
+<h3>费马小定理</h3>
+
+<p>如果a和质数p互质，因为$\phi(p) = p - 1$，则有</p>
+
+<p>$$ a^{p-1} \equiv 1 \pmod p $$</p>
+
+<h2>RSA</h2>
+
+<h3>秘钥生成过程</h3>
+
+<ol>
+<li>随机选择两个不相等的质数p和q</li>
+<li>计算p和q的乘积n，n的二进制位数被称为秘钥的长度</li>
+<li>计算n的欧拉函数$\phi(n) = (p-1)(q-1)$</li>
+<li>随机选择整数e，$1 &lt; e &lt; \phi(n)$，且e与$\phi(n)$互质</li>
+<li>计算e对于$\phi(n)$的逆元d，即$ed \equiv 1 \pmod {\phi(n)}$</li>
+<li>其中公钥为(n, e)，私钥为(n, d)</li>
+</ol>
+
+<h3>加密与解密过程</h3>
+
+<p>对于小于n的整数m，加密为：</p>
+
+<p>$ c = m^e \mod n$</p>
+
+<p>m为需要加密的信息，e为公钥，c为加密后的密文。</p>
+
+<p>$ m = c^d \mod n $</p>
+
+<p>d为私钥。</p>
+
+<h2>Miller-Rabin 素性检测</h2>
+
+<h3>定理</h3>
+
+<p>如果 p 是素数，x 是小于 p 的正整数，且 $ x^2 \mod p = 1 $，那么要么 x = 1，要么 x = p - 1。</p>
+
+<ul>
+<li>证明</li>
+</ul>
+
+<p>因为 $ x^2 \mod p = 1 $，所以 $ p | x^2-1$，即 $ p | (x+1)(x-1) $，因为 p 是素数，所以 p 要么整除 x+1，要么整除 x-1，所以 要么 x - 1 = 0，要么 x + 1 = p。</p>
+</article>
+                <section class="author">
+                    
+                    <a class="name" href="/about..html"></a>
+                    <div class="intro"></div>
+                </section>
+                <section class="recommend">
+                    
+                    
+                    <section class="nav next">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/beziercurve.html">如何生成光滑曲线？</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            
+            ""
+            
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        浅云的博客 ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
