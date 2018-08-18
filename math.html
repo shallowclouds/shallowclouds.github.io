@@ -68,9 +68,9 @@
 
 
         <meta name="keywords" content="算法,数学,">
-        <meta name="description" content="数论的一些基础知识点">
+        <meta name="description" content="基础数论的一些知识">
         <meta name="author" content="">
-        <title>数论的一些基础知识点</title>
+        <title>基础数论的一些知识</title>
     </head>
     <body>
         <article class="container">
@@ -89,7 +89,7 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">数论的一些基础知识点</h1>
+                <h1 class="title">基础数论的一些知识</h1>
                 <section class="info">
                     
                     
@@ -98,9 +98,7 @@
                     
                     <span class="tags"><a class="tag" href="/tag/%e7%ae%97%e6%b3%95/index.html">算法</a><a class="tag" href="/tag/%e6%95%b0%e5%ad%a6/index.html">数学</a></span>
                 </section>
-                <article class="content"><h1>数论</h1>
-
-<p>一些数论相关的知识点。</p>
+                <article class="content"><p>一些基本数论相关的知识。</p>
 
 <h2>逆元(inverse)</h2>
 
@@ -259,23 +257,37 @@ for(int i = 2; i &lt; 10000; i++)
 
 <h2>Miller-Rabin 素性检测</h2>
 
-<h3>定理</h3>
+<p>Miller-Rabin 算法是一种判断一个数是否为质数的算法。</p>
 
-<p>如果 p 是素数，x 是小于 p 的正整数，且 $ x^2 \mod p = 1 $，那么要么 x = 1，要么 x = p - 1。</p>
+<p>算法主要基于两个事实</p>
 
 <ul>
-<li>证明</li>
+<li>费马小定理，即对于任意质数p以及 $p\nmid a$ ，有 $a^{p-1}\equiv 1(\bmod p)$</li>
+<li>对于质数 $p$ ，$x^2\equiv 1(\bmod p)$ 有且只有平凡解 $x\equiv \pm 1(\bmod p)$</li>
 </ul>
 
-<p>因为 $ x^2 \mod p = 1 $，所以 $ p | x^2-1$，即 $ p | (x+1)(x-1) $，因为 p 是素数，所以 p 要么整除 x+1，要么整除 x-1，所以 要么 x - 1 = 0，要么 x + 1 = p。</p>
+<p>算法的伪代码如下</p>
 
-<p>$$
-\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
-\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \ <br />
-\frac{\partial X}{\partial u} &amp;  \frac{\partial Y}{\partial u} &amp; 0 \ <br />
-\frac{\partial X}{\partial v} &amp;  \frac{\partial Y}{\partial v} &amp; 0 \ <br />
-\end{vmatrix}
-$$</p>
+<pre><code>Input #1: n &gt; 3, an odd integer to be tested for primality;
+Input #2: k, a parameter that determines the accuracy of the test
+Output: composite if n is composite, otherwise probably prime
+write n − 1 as (2^r)·d with d odd by factoring powers of 2 from n − 1
+WitnessLoop: repeat k times:
+   pick a random integer a in the range [2, n − 2]
+   x ← (a^d) mod n
+   if x = 1 or x = n − 1 then
+      continue WitnessLoop
+   repeat r − 1 times:
+      x ← (x^2) mod n
+      if x = 1 then
+         return composite
+      if x = n − 1 then
+         continue WitnessLoop
+   return composite
+return probably prime
+</code></pre>
+
+<p>可以证明，上述代码的正确率至少为 $1-2^{-k}$，即尝试的次数 $k$ 越多，出错概率越小（出错概率即把合数误判成质数的概率）。</p>
 </article>
                 <section class="author">
                     
