@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>浅云的博客</title>
-  <id>https://shallowclouds.github.io</id>
-  <updated>2018-08-18T17:16:01+08:00</updated>
-  <subtitle>分享一些奇怪的东西 邮箱：i@yorling.com</subtitle>
-  <link href="https://shallowclouds.github.io"></link>
+  <id>https://blog.shallowcloud.com</id>
+  <updated>2018-08-18T17:48:37+08:00</updated>
+  <subtitle>分享一些奇怪的东西</subtitle>
+  <link href="https://blog.shallowcloud.com"></link>
   <author>
     <name>浅云的博客</name>
   </author>
   <entry>
     <title>数论的一些基础知识点</title>
     <updated>2018-08-18T17:07:00+08:00</updated>
-    <id>tag:shallowclouds.github.io,2018-08-18:/math.html</id>
+    <id>tag:blog.shallowcloud.com,2018-08-18:/math.html</id>
     <content type="html"></content>
-    <link href="https://shallowclouds.github.io/math.html"></link>
+    <link href="https://blog.shallowcloud.com/math.html"></link>
   </entry>
   <entry>
     <title>如何生成光滑曲线？</title>
     <updated>2017-12-13T13:40:15+08:00</updated>
-    <id>tag:shallowclouds.github.io,2017-12-13:/beziercurve.html</id>
+    <id>tag:blog.shallowcloud.com,2017-12-13:/beziercurve.html</id>
     <content type="html"></content>
-    <link href="https://shallowclouds.github.io/beziercurve.html"></link>
+    <link href="https://blog.shallowcloud.com/beziercurve.html"></link>
   </entry>
 </feed>
