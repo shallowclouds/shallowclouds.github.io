@@ -28,6 +28,17 @@
 <meta itemprop="image" content="https://blog.shallowcloud.com/images/yorling.jpg">
 
 <link rel="canonical" href="https://blog.shallowcloud.com">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'],],
+        processEscapes: true
+      }
+    });
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML" async></script>
+
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70463733-2"></script>
@@ -43,9 +54,6 @@
 <link rel="apple-itouch-icon" href="/favicon.png">
 <link rel="stylesheet" href="/bundle/index.css">
 
-
- <script src="http://kramdown.rubyforge.org/MathJax/MathJax.js" type="text/javascript"></script>
-
 <script type="text/javascript">
     var timeSinceLang = {
         year: '年前',
@@ -56,6 +64,28 @@
         second: '秒前'
     };
     var root = '';
+</script>
+
+<script type="text/javascript">
+    var conn, reloadTimer, connectTimer;
+    var connect = function() {
+        conn = new WebSocket('ws://' + location.host + '/live');
+        conn.onmessage = function(event) {
+            if (event.data === 'change') {
+                if (reloadTimer) clearTimeout(reloadTimer);
+                reloadTimer = setTimeout(function() {
+                    window.location.reload();
+                }, 200);
+            }
+        };
+        conn.onclose = function() {
+            if (connectTimer) clearTimeout(connectTimer);
+            connectTimer = setTimeout(function() {
+                connect();
+            }, 1000);
+        };
+    };
+    connect();
 </script>
 
 
