@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>浅云的博客</title>
   <id>https://shallowclouds.github.io</id>
-  <updated>2017-12-16T19:55:19+08:00</updated>
+  <updated>2018-08-18T16:51:11+08:00</updated>
   <subtitle>分享一些奇怪的东西 邮箱：i@yorling.com</subtitle>
   <link href="https://shallowclouds.github.io"></link>
   <author>
@@ -13,12 +13,5 @@
     <id>tag:shallowclouds.github.io,2017-12-13:/beziercurve.html</id>
     <content type="html"></content>
     <link href="https://shallowclouds.github.io/beziercurve.html"></link>
-  </entry>
-  <entry>
-    <title>markdown-test</title>
-    <updated>2017-12-05T13:40:15+08:00</updated>
-    <id>tag:shallowclouds.github.io,2017-12-05:/markdown-test.html</id>
-    <content type="html">&lt;p&gt;似乎inkpaper没有对于数学公式的支持啊。。&lt;/p&gt;&#xA;</content>
-    <link href="https://shallowclouds.github.io/markdown-test.html"></link>
   </entry>
 </feed>
