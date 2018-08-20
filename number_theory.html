@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅云">
+<meta name="twitter:description" content="分享一些奇怪的东西">
+<meta name="twitter:image:src" content="https://blog.shallowcloud.com/images/yorling.jpg">
+
+<meta property="og:url" content="https://blog.shallowcloud.com">
+<meta property="og:title" content="浅云">
+<meta property="og:description" content="分享一些奇怪的东西">
+<meta property="og:site_name" content="浅云">
+<meta property="og:image" content="https://blog.shallowcloud.com/images/yorling.jpg">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="浅云">
+<meta itemprop="description" content="分享一些奇怪的东西">
+<meta itemprop="image" content="https://blog.shallowcloud.com/images/yorling.jpg">
+
+<link rel="canonical" href="https://blog.shallowcloud.com">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'],],
+        processEscapes: true
+      }
+    });
+</script>
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML" async></script>
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-70463733-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-70463733-2');
+</script>
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: ' years ago',
+        month: ' months ago',
+        day: ' days ago',
+        hour: ' hours ago',
+        minute: ' minutes ago',
+        second: ' seconds ago'
+    };
+    var root = '';
+</script>
+
+
+        <meta name="keywords" content="算法,数学,">
+        <meta name="description" content="基础数论的一些知识">
+        <meta name="author" content="">
+        <title>基础数论的一些知识</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/yorling.jpg" />
+    浅云
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">ARCHIVE</a></li>
+      <li class="menu-item"><a href="/tag.html">TAG</a></li>
+      <li class="menu-item"><a href="/about.me.html">ABOUT</a></li>
+      <li class="menu-item"><a href="/friends.html">FRIENDS</a></li>
+      <li class="menu-item"><a href="/atom.xml">RSS</a></li>
+      <li class="menu-item"><a href="https://github.com/shallowclouds/">GITHUB</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">基础数论的一些知识</h1>
+                <section class="info">
+                    
+                    
+                    
+                    <span class="date" data-time="1534583220"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/%e7%ae%97%e6%b3%95/index.html">算法</a><a class="tag" href="/tag/%e6%95%b0%e5%ad%a6/index.html">数学</a></span>
+                </section>
+                <article class="content"><p>一些基本数论相关的知识。</p>
+
+<h2>逆元(inverse)</h2>
+
+<p>若 $b$ 是 $a$关于 $m$ 的逆元则有：$ ab \equiv 1 \pmod m $，即 $ (ab) \bmod m = 1 $。</p>
+
+<h3>应用</h3>
+
+<p>求解 $ (a/b) \bmod m $：</p>
+
+<p>设 $c$ 为 $b$ 关于 $m$ 的逆元，即有： $ (bc) \bmod m = 1 $ 。</p>
+
+<p>那么 $ (a/b) \bmod m = (a/b*1) \bmod m = ((a/b) * (bc)) \bmod m = (a*c) \bmod m $</p>
+
+<p>即：$a$ 除以 $b$ 取模等价于 $a$ 乘以 $b$ 的逆元取模。</p>
+
+<h3>求解</h3>
+
+<h4>扩展欧几里得</h4>
+
+<p>若 $b$ 是 $a$ 关于 $m$ 的逆元则有：$ ab \equiv 1 \pmod m $。</p>
+
+<p>等价于存在 k 使得 $ k*m + 1 = ab $，即求解 $ km - ab = 1 $ 中的 $b$，由于 a 和 m 已知，可将 b 和 k 看成未知数，问题转化为求解线性方程：$ mx - ay = 1 $，可以使用扩展欧几里得算法( exgcd )求解。</p>
+
+<p>同时我们通过扩展欧几里得算法的限制知道：若 a 和 m 不互质（$\gcd (a, m) \neq 1$），则不存在 a 关于 m 的逆元。</p>
+
+<pre><code class="language-c++">ll extend_gcd(ll a, ll b, ll &amp;x, ll &amp;y) 
+{
+    if (b == 0) 
+    {
+        x = 1, y = 0;
+        return a;
+    }
+    else 
+    {
+        ll r = extend_gcd(b, a % b, y, x);
+        y -= x * (a / b);
+        return r;
+    }
+}
+
+ll inv(ll a, ll n) 
+{
+    ll x, y;
+    extend_gcd(a, n, x, y);
+    x = (x % n + n) % n;
+    return x;
+}
+</code></pre>
+
+<h4>费马小定理</h4>
+
+<p>由费马小定理可知：$ x^{p-1} \equiv 1 \pmod p $，则有：$ x * x ^{p-2} \equiv 1 \pmod p $。</p>
+
+<p>即 x 的逆元是 $x^{p-2}$。</p>
+
+<p>注意 x 和 p 必须互质。</p>
+
+<pre><code class="language-c++">const int mod = 1000000009;
+long long quickpow(long long a, long long b) 
+{
+    if (b &lt; 0) return 0;
+    long long ret = 1;
+    a %= mod;
+    while(b) 
+    {
+        if (b &amp; 1) ret = (ret * a) % mod;
+        b &gt;&gt;= 1;
+        a = (a * a) % mod;
+    }
+    return ret;
+}
+long long inv(long long a) 
+{
+    return quickpow(a, mod - 2);
+}
+</code></pre>
+
+<h4>线性逆元筛</h4>
+
+<pre><code class="language-c++">const int mod = 1000000009;
+const int maxn = 10005;
+int inv[maxn];
+inv[1] = 1;
+for(int i = 2; i &lt; 10000; i++)
+    inv[i] = inv[mod % i] * (mod - mod / i) % mod;
+</code></pre>
+
+<h4>求阶乘的逆元</h4>
+
+<pre><code class="language-c++">const int mod = 1000000009;
+const int maxn = 10005;
+int inv[maxn];
+inv[1] = 1;
+for(int i = 2; i &lt; 10000; i++)
+    inv[i] = inv[mod % i] * (mod - mod / i) % mod;
+</code></pre>
+
+<h4>快速求组合数</h4>
+
+<p>如果需要快速求出模 $P$ 意义下的 $ C_{n}^{m} $ ($n,m &lt; N$)，可以先线性复杂度求出 $1$ 到 $ n $ 阶乘的逆元，然后套用组合数公式即可求出</p>
+
+<p>$$
+C_{n}^{m} \% P = inv[fact(n)] * inv[fact(m)] * inv[fact[n-m]]
+$$</p>
+
+<h2>欧拉定理</h2>
+
+<h3>欧拉函数</h3>
+
+<p>$\phi(n)$表示小于等于 $ n $ 的正整数之中，有多少个与$n$构成互质关系。</p>
+
+<p>分类讨论</p>
+
+<ol>
+<li>n = 1， 则$\phi(n) = 1$</li>
+<li>n 为质数，则$ \phi(n) = n - 1 $</li>
+<li>n 为质数的某个幂，即$ n = p ^ k $(p为质数)，则$ \phi(n)  = p^k - p^{k-1} $</li>
+<li>n 为两个互质的整数之积，即 $ n = p_1 \times p_2 $ ，则$ \phi(n) = \phi(p_1p_2) = \phi(p_1) \phi(p_2)$</li>
+<li>n 分解为若干个质数的幂 ，即 $ n = p_1^{c1} p_2^{c2} p_3^{c3}&hellip;p_n^{cn} $，则根据4可知 $\phi(n) = n(1-\frac{1}{p1})(1-\frac{1}{p2})(1-\frac{1}{p3})&hellip;(1-\frac{1}{pr})$</li>
+</ol>
+
+<h3>欧拉定理</h3>
+
+<p>如果两个正整数a，n互质，则n的欧拉函数满足以下等式：</p>
+
+<p>$$a^{\phi(n)} \equiv  1 \pmod n$$</p>
+
+<h3>费马小定理</h3>
+
+<p>如果a和质数p互质，因为$\phi(p) = p - 1$，则有</p>
+
+<p>$$ a^{p-1} \equiv 1 \pmod p $$</p>
+
+<h2>RSA</h2>
+
+<h3>秘钥生成过程</h3>
+
+<ol>
+<li>随机选择两个不相等的质数p和q</li>
+<li>计算p和q的乘积n，n的二进制位数被称为秘钥的长度</li>
+<li>计算n的欧拉函数$\phi(n) = (p-1)(q-1)$</li>
+<li>随机选择整数e，$1 &lt; e &lt; \phi(n)$，且e与$\phi(n)$互质</li>
+<li>计算e对于$\phi(n)$的逆元d，即$ed \equiv 1 \pmod {\phi(n)}$</li>
+<li>其中公钥为(n, e)，私钥为(n, d)</li>
+</ol>
+
+<h3>加密与解密过程</h3>
+
+<p>对于小于n的整数m，加密为：</p>
+
+<p>$ c = m^e \mod n$</p>
+
+<p>m为需要加密的信息，e为公钥，c为加密后的密文。</p>
+
+<p>$ m = c^d \mod n $</p>
+
+<p>d为私钥。</p>
+
+<h2>Miller-Rabin 素性检测</h2>
+
+<p>Miller-Rabin 算法是一种判断一个数是否为质数的算法。</p>
+
+<p>算法主要基于两个事实</p>
+
+<ul>
+<li>费马小定理，即对于任意质数p以及 $p\nmid a$ ，有 $a^{p-1}\equiv 1(\bmod p)$</li>
+<li>对于质数 $p$ ，$x^2\equiv 1(\bmod p)$ 有且只有平凡解 $x\equiv \pm 1(\bmod p)$</li>
+</ul>
+
+<p>算法的伪代码如下</p>
+
+<pre><code>Input #1: n &gt; 3, an odd integer to be tested for primality;
+Input #2: k, a parameter that determines the accuracy of the test
+Output: composite if n is composite, otherwise probably prime
+write n − 1 as (2^r)·d with d odd by factoring powers of 2 from n − 1
+WitnessLoop: repeat k times:
+   pick a random integer a in the range [2, n − 2]
+   x ← (a^d) mod n
+   if x = 1 or x = n − 1 then
+      continue WitnessLoop
+   repeat r − 1 times:
+      x ← (x^2) mod n
+      if x = 1 then
+         return composite
+      if x = n − 1 then
+         continue WitnessLoop
+   return composite
+return probably prime
+</code></pre>
+
+<p>可以证明，上述代码的正确率至少为 $1-2^{-k}$，即尝试的次数 $k$ 越多，出错概率越小（出错概率即把合数误判成质数的概率）。</p>
+
+<h2>多项式</h2>
+
+<h3>快速傅里叶变换(FFT)</h3>
+
+<p>欧拉公式：$ e^{i\theta} = \cos \theta + i \sin \theta $</p>
+</article>
+                <section class="author">
+                    
+                    <a class="name" href="/about..html"></a>
+                    <div class="intro"></div>
+                </section>
+                <section class="recommend">
+                    
+                    
+                    <section class="nav next">
+                        <div class="head">Next Reading</div>
+                        <a class="link" href="/beziercurve.html">如何生成光滑曲线？</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            
+            ""
+            
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    
+    <span class="copyright">
+        浅云 ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+    <span class="publish">Email: i@yorling.com</span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>

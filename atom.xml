@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>浅云</title>
   <id>https://blog.shallowcloud.com</id>
-  <updated>2018-08-18T22:30:34+08:00</updated>
+  <updated>2018-08-20T21:41:02+08:00</updated>
   <subtitle>分享一些奇怪的东西</subtitle>
   <link href="https://blog.shallowcloud.com"></link>
   <author>
@@ -10,9 +10,9 @@
   <entry>
     <title>基础数论的一些知识</title>
     <updated>2018-08-18T17:07:00+08:00</updated>
-    <id>tag:blog.shallowcloud.com,2018-08-18:/math.html</id>
+    <id>tag:blog.shallowcloud.com,2018-08-18:/number_theory.html</id>
     <content type="html"></content>
-    <link href="https://blog.shallowcloud.com/math.html"></link>
+    <link href="https://blog.shallowcloud.com/number_theory.html"></link>
   </entry>
   <entry>
     <title>如何生成光滑曲线？</title>
