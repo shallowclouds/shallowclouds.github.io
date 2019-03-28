@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
-  <title>浅云</title>
+  <title>浅云的博客</title>
   <id>https://blog.shallowcloud.com</id>
-  <updated>2019-03-28T15:36:25+08:00</updated>
+  <updated>2019-03-28T16:50:19+08:00</updated>
   <subtitle>分享一些奇怪的东西</subtitle>
   <link href="https://blog.shallowcloud.com"></link>
   <author>
-    <name>浅云</name>
+    <name>浅云的博客</name>
   </author>
   <entry>
     <title>基础数论的一些知识</title>
